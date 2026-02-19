@@ -1,0 +1,9 @@
+[
+  {"country": "Afghanistan", "iso3": "AFG", "iso2": "AF", "year": 2024, "rank": 162, "value": 20, "upper": 23, "lower": 18},
+  {"country": "Afghanistan", "iso3": "AFG", "iso2": "AF", "year": 2023, "rank": 162, "value": 20, "upper": 23, "lower": 18},
+  {"country": "Afghanistan", "iso3": "AFG", "iso2": "AF", "year": 2012, "rank": 174, "value": 8, "upper": 10, "lower": 6},
+  {"country": "Afghanistan", "iso3": "AFG", "iso2": "AF", "year": 2011, "rank": 180, "value": 8, "upper": 10, "lower": 6},
+  {"country": "Sudan", "iso3": "SDN", "iso2": "SD", "year": 2024, "rank": 163, "value": 21, "upper": 25, "lower": 18},
+  {"country": "Sudan", "iso3": "SDN", "iso2": "SD", "year": 2023, "rank": 162, "value": 22, "upper": 25, "lower": 18},
+  {"country": "Sudan", "iso3": "SDN", "iso2": "SD", "year": 2012, "rank": 173, "value": 13, "upper": 15, "lower": 11}
+]

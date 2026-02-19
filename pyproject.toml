@@ -10,37 +10,28 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hdx-scraper-ti"
-requires-python = ">=3.12"
+dynamic = ["version"]
+requires-python = ">=3.13"
 dependencies = [
   "hdx-python-api",
+  "hdx-python-country",
   "hdx-python-utilities",
 ]
 
-dynamic = ["version"]
-
-[project.optional-dependencies]
-test = [
+[dependency-groups]
+dev = [
   "pytest",
-  "pytest-cov"
+  "pytest-cov",
+  "pre-commit",
+  "ruff==0.14.14",
 ]
-dev = ["pre-commit"]
 
-#########
-# Hatch #
-#########
+[project.scripts]
+run = "hdx.scraper.ti.__main__:main"
 
-# Build
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/hdx"]
-
-[tool.hatch.build.hooks.vcs]
-version-file = "src/hdx/scraper/ti/_version.py"
-
-[tool.hatch.metadata]
-allow-direct-references = true
-
-# Versioning
+# ----------------------------------------------------------------------------
+# Hatchling (Build & Versioning)
+# ----------------------------------------------------------------------------
 
 [tool.hatch.version]
 source = "vcs"
@@ -49,23 +40,81 @@ source = "vcs"
 local_scheme = "no-local-version"
 version_scheme = "python-simplified-semver"
 
-# Tests
+[tool.hatch.build.hooks.vcs]
+version-file = "src/hdx/scraper/ti/_version.py"
 
-[tool.hatch.envs.hatch-test]
-features = ["test"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/hdx"]
 
-[[tool.hatch.envs.hatch-test.matrix]]
-python = ["3.12"]
+[tool.hatch.metadata]
+allow-direct-references = true
 
-[tool.hatch.envs.hatch-test.scripts]
-run = """
-       pytest -c .config/pytest.ini --rootdir=. --junitxml=test-results.xml \
-       --cov --cov-config=.config/coveragerc --no-cov-on-fail \
-       --cov-report=lcov --cov-report=term-missing
-       """
+# ----------------------------------------------------------------------------
+# Ruff (Linting & Formatting)
+# ----------------------------------------------------------------------------
 
-[tool.hatch.envs.hatch-static-analysis.scripts]
-format-check = ["ruff format --config .config/ruff.toml --check --diff {args:.}",]
-format-fix = ["ruff format --config .config/ruff.toml {args:.}",]
-lint-check = ["ruff check --config .config/ruff.toml {args:.}",]
-lint-fix = ["ruff check --config .config/ruff.toml --fix {args:.}",]
+[tool.ruff]
+target-version = "py313"
+src = ["src"]
+exclude = ["_version.py"]
+
+[tool.ruff.lint]
+# Defaults are E (pycodestyle) and F (pyflakes). We extend them:
+extend-select = [
+  "I",   # isort
+  "UP",  # pyupgrade
+]
+ignore = [
+    "E501", # Line too long
+]
+
+[tool.ruff.lint.isort]
+known-local-folder = ["hdx.scraper.ti"]
+known-third-party = [
+    "hdx.api",
+    "hdx.location",
+    "hdx.data",
+    "hdx.database",
+    "hdx.facades",
+    "hdx.scraper",
+    "hdx.utilities",
+]
+
+# ----------------------------------------------------------------------------
+# Pytest (Testing)
+# ----------------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+log_cli = true
+addopts = """
+    --color=yes
+    --rootdir=.
+    --junitxml=test-results.xml
+    --cov
+    --no-cov-on-fail
+    --cov-report=lcov
+    --cov-report=term-missing
+"""
+
+# ----------------------------------------------------------------------------
+# Coverage (Reporting)
+# ----------------------------------------------------------------------------
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/_version.py"]
+
+[tool.coverage.report]
+exclude_also = [
+    "from ._version",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@(abc\\.)?abstractmethod",
+]
