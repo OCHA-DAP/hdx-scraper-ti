@@ -1,9 +1,9 @@
-# Collector for Ti Datasets
+# Collector for Tranparency International Datasets
 [![Build Status](https://github.com/OCHA-DAP/hdx-scraper-ti/actions/workflows/run-python-tests.yaml/badge.svg)](https://github.com/OCHA-DAP/hdx-scraper-ti/actions/workflows/run-python-tests.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/OCHA-DAP/hdx-scraper-ti/badge.svg?branch=main&ts=1)](https://coveralls.io/github/OCHA-DAP/hdx-scraper-ti?branch=main)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-This script ...
+This script pulls Corruption Perceptions Index (CPI) data from the [Transparency International](https://www.transparency.org) API. It creates one dataset per country with CPI scores and ranks from 2012 onward, as well as a single global dataset with all countries. This script runs Q1 of each year.
 
 ## Development
 

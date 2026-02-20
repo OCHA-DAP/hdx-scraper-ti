@@ -104,10 +104,53 @@ class TestPipeline:
                     path=join(config_dir, "hdx_dataset_static.yaml")
                 )
 
-                assert global_dataset["name"] == "global-corruption-perceptions-index"
-                assert (
-                    global_dataset["title"] == "Global - Corruption Perceptions Index"
-                )
+                assert global_dataset == {
+                    "caveats": "None",
+                    "name": "global-corruption-perceptions-index",
+                    "title": "Global - Corruption Perceptions Index",
+                    "dataset_date": "[2012-01-01T00:00:00 TO 2024-01-01T23:59:59]",
+                    "tags": [
+                        {
+                            "name": "development",
+                            "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
+                        },
+                        {
+                            "name": "economics",
+                            "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
+                        },
+                        {
+                            "name": "environment",
+                            "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
+                        },
+                        {
+                            "name": "poverty",
+                            "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
+                        },
+                        {
+                            "name": "socioeconomics",
+                            "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
+                        },
+                    ],
+                    "license_id": "cc-by",
+                    "methodology": "https://images.transparencycdn.org/images/CPI-2024-Methodology.zip",
+                    "dataset_source": "Transparency International",
+                    "groups": [{"name": "world"}],
+                    "package_creator": "HDX Data Systems Team",
+                    "private": False,
+                    "maintainer": "bfeeb369-fb53-4ecd-b8d2-e98b8020a1f9",
+                    "owner_org": "hdx",
+                    "data_update_frequency": 365,
+                    "notes": "The Corruption Perception Index (CPI) scores and ranks 180 countries "
+                    "and territories worldwide based on how corrupt a country’s public sector "
+                    "is perceived to be by experts and business executives. It is a composite "
+                    "index, a combination of at least 3 and up to 13 surveys and assessments "
+                    "of corruption, collected by a variety of reputable institutions. The "
+                    "results are given on a scale of 0 (highly corrupt) to 100 (very clean). "
+                    "The CPI is the most widely used indicator of corruption worldwide.\n"
+                    "\n"
+                    "Read more about the CPI here: [https://www.transparency.org/en/cpi]"
+                    "(https://www.transparency.org/en/cpi)\n",
+                }
 
                 global_resources = global_dataset.get_resources()
                 assert len(global_resources) == 1
@@ -116,3 +159,9 @@ class TestPipeline:
                     global_resources[0]["description"]
                     == "Corruption Perceptions Index scores and ranks for all countries"
                 )
+
+                for global_resource in global_resources:
+                    filename = global_resource["name"]
+                    actual = join(tempdir, filename)
+                    expected = join(input_dir, filename)
+                    assert_files_same(actual, expected)
