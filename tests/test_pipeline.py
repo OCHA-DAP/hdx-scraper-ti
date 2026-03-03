@@ -73,7 +73,7 @@ class TestPipeline:
                     "maintainer": "0e37ef02-82c6-4f36-a336-52e94df45ee9",
                     "owner_org": "e0035cc4-87fb-443c-8045-4e9f7463a67c",
                     "data_update_frequency": 365,
-                    "notes": "The Corruption Perception Index (CPI) scores and ranks 180 countries "
+                    "notes": "The Corruption Perception Index (CPI) scores and ranks over 100 countries "
                     "and territories worldwide based on how corrupt a country’s public sector "
                     "is perceived to be by experts and business executives. It is a composite "
                     "index, a combination of at least 3 and up to 13 surveys and assessments "
@@ -140,7 +140,7 @@ class TestPipeline:
                     "maintainer": "0e37ef02-82c6-4f36-a336-52e94df45ee9",
                     "owner_org": "e0035cc4-87fb-443c-8045-4e9f7463a67c",
                     "data_update_frequency": 365,
-                    "notes": "The Corruption Perception Index (CPI) scores and ranks 180 countries "
+                    "notes": "The Corruption Perception Index (CPI) scores and ranks over 100 countries "
                     "and territories worldwide based on how corrupt a country’s public sector "
                     "is perceived to be by experts and business executives. It is a composite "
                     "index, a combination of at least 3 and up to 13 surveys and assessments "
