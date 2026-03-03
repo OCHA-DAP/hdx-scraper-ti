@@ -31,7 +31,7 @@ _UPDATED_BY_SCRIPT = "HDX Scraper: Ti"
 def main(
     save: bool = False,
     use_saved: bool = False,
-    countries: str = "",
+    countries: str = "AFG,ARG",
 ) -> None:
     """Generate datasets and create them in HDX
 

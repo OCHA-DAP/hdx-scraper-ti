@@ -21,11 +21,6 @@ jobs:
           cache-dependency-glob: "uv.lock"
           python-version: "3.13"
 
-      - name: Debug connectivity
-        run: |
-          curl -v "https://www.transparency.org/en/api/latest/cpi" 2>&1
-          echo "Our IP: $(curl -s https://api.ipify.org)"
-
       - name: Run script
         env:
           HDX_SITE: ${{ vars.HDX_SITE }}

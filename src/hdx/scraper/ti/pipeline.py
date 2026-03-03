@@ -24,7 +24,13 @@ class Pipeline:
         Get data from Transparency International API and split by country
         """
         base_url = self._configuration["base_url"]
-        data = self._retriever.download_json(base_url)
+        # data = self._retriever.download_json(base_url)
+        data = self._retriever.download_json(
+            base_url,
+            headers={
+                "User-Agent": "Mozilla/5.0 (compatible; OCHA Centre for Humanitarian Data; +https://data.humdata.org)"
+            },
+        )
 
         # Split data by country and only take data from 2012 onward
         country_data = {}
