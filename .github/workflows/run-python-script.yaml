@@ -33,6 +33,11 @@ jobs:
         run: |
           uv run --frozen python -m hdx.scraper.ti
 
+      - name: Debug connectivity
+        run: |
+          curl -v "https://www.transparency.org/en/api/latest/cpi" 2>&1
+          echo "Our IP: $(curl -s https://api.ipify.org)"
+
 #      - name: Send mail
 #        if: failure()
 #        uses: dawidd6/action-send-mail@v7
