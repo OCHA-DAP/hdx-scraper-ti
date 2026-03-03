@@ -48,11 +48,11 @@ class TestPipeline:
                             "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
                         },
                         {
-                            "name": "economics",
+                            "name": "governance and civil society",
                             "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
                         },
                         {
-                            "name": "environment",
+                            "name": "indicators",
                             "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
                         },
                         {
@@ -70,8 +70,8 @@ class TestPipeline:
                     "groups": [{"name": "afg"}],
                     "package_creator": "HDX Data Systems Team",
                     "private": False,
-                    "maintainer": "bfeeb369-fb53-4ecd-b8d2-e98b8020a1f9",
-                    "owner_org": "hdx",
+                    "maintainer": "0e37ef02-82c6-4f36-a336-52e94df45ee9",
+                    "owner_org": "e0035cc4-87fb-443c-8045-4e9f7463a67c",
                     "data_update_frequency": 365,
                     "notes": "The Corruption Perception Index (CPI) scores and ranks 180 countries "
                     "and territories worldwide based on how corrupt a country’s public sector "
@@ -87,7 +87,7 @@ class TestPipeline:
 
                 resources = dataset.get_resources()
                 assert len(resources) == 1
-                assert resources[0]["name"] == "afg_cpi.csv"
+                assert resources[0]["name"] == "afg-cpi.csv"
                 assert (
                     resources[0]["description"]
                     == "Corruption Perceptions Index score and rank for Afghanistan"
@@ -115,11 +115,11 @@ class TestPipeline:
                             "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
                         },
                         {
-                            "name": "economics",
+                            "name": "governance and civil society",
                             "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
                         },
                         {
-                            "name": "environment",
+                            "name": "indicators",
                             "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
                         },
                         {
@@ -137,8 +137,8 @@ class TestPipeline:
                     "groups": [{"name": "world"}],
                     "package_creator": "HDX Data Systems Team",
                     "private": False,
-                    "maintainer": "bfeeb369-fb53-4ecd-b8d2-e98b8020a1f9",
-                    "owner_org": "hdx",
+                    "maintainer": "0e37ef02-82c6-4f36-a336-52e94df45ee9",
+                    "owner_org": "e0035cc4-87fb-443c-8045-4e9f7463a67c",
                     "data_update_frequency": 365,
                     "notes": "The Corruption Perception Index (CPI) scores and ranks 180 countries "
                     "and territories worldwide based on how corrupt a country’s public sector "
@@ -153,12 +153,19 @@ class TestPipeline:
                 }
 
                 global_resources = global_dataset.get_resources()
-                assert len(global_resources) == 1
-                assert global_resources[0]["name"] == "global-cpi.csv"
+                assert len(global_resources) == 4  # 1 all-years + 3 per-year
+                assert global_resources[0]["name"] == "global-cpi-all.csv"
                 assert (
                     global_resources[0]["description"]
                     == "Corruption Perceptions Index scores and ranks for all countries"
                 )
+                assert global_resources[1]["name"] == "global-cpi-2024.csv"
+                assert (
+                    global_resources[1]["description"]
+                    == "Corruption Perceptions Index scores and ranks for all countries in 2024"
+                )
+                assert global_resources[2]["name"] == "global-cpi-2023.csv"
+                assert global_resources[3]["name"] == "global-cpi-2012.csv"
 
                 for global_resource in global_resources:
                     filename = global_resource["name"]

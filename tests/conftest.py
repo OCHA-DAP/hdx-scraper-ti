@@ -44,8 +44,8 @@ def configuration(config_dir):
             {"name": tag}
             for tag in (
                 "development",
-                "economics",
-                "environment",
+                "governance and civil society",
+                "indicators",
                 "poverty",
                 "socioeconomics",
             )

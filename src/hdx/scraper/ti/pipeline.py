@@ -35,6 +35,9 @@ class Pipeline:
         return country_data
 
     def generate_dataset(self, countryiso: str, records: list) -> Dataset | None:
+        if countryiso == "KSV":
+            countryiso = "XKX"
+        Country.set_include_unofficial_default(True)
         country_name = Country.get_country_name_from_iso3(countryiso)
         if not country_name:
             logger.error(f"Couldn't find country name for {countryiso}, skipping")
@@ -59,7 +62,7 @@ class Pipeline:
         years = [record["year"] for record in records]
         dataset.set_time_period(datetime(min(years), 1, 1), datetime(max(years), 1, 1))
 
-        resource_name = f"{countryiso.lower()}_cpi.csv"
+        resource_name = f"{countryiso.lower()}-cpi.csv"
         resource_description = self._configuration["description"].replace(
             "(country)", country_name
         )
@@ -97,15 +100,32 @@ class Pipeline:
             logger.error("Couldn't add world location, skipping global dataset")
             return None
 
+        headers = list(all_records[0].keys())
+
         dataset.generate_resource(
             folder=self._tempdir,
-            filename="global-cpi.csv",
+            filename="global-cpi-all.csv",
             rows=all_records,
             resourcedata={
-                "name": "global-cpi.csv",
+                "name": "global-cpi-all.csv",
                 "description": self._configuration["description_global"],
             },
-            headers=list(all_records[0].keys()),
+            headers=headers,
         )
+
+        for year in sorted(set(years), reverse=True):
+            year_records = [r for r in all_records if r["year"] == year]
+            dataset.generate_resource(
+                folder=self._tempdir,
+                filename=f"global-cpi-{year}.csv",
+                rows=year_records,
+                resourcedata={
+                    "name": f"global-cpi-{year}.csv",
+                    "description": self._configuration["description_year"].replace(
+                        "(year)", str(year)
+                    ),
+                },
+                headers=headers,
+            )
 
         return dataset
