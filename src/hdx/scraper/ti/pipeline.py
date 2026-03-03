@@ -24,7 +24,6 @@ class Pipeline:
         Get data from Transparency International API and split by country
         """
         base_url = self._configuration["base_url"]
-        # data = self._retriever.download_json(base_url)
         data = self._retriever.download_json(base_url)
 
         # Split data by country and only take data from 2012 onward
