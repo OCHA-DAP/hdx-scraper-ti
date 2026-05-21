@@ -73,21 +73,14 @@ class TestPipeline:
                     "maintainer": "0e37ef02-82c6-4f36-a336-52e94df45ee9",
                     "owner_org": "e0035cc4-87fb-443c-8045-4e9f7463a67c",
                     "data_update_frequency": 365,
-                    "notes": "The Corruption Perception Index (CPI) scores and ranks over 100 countries "
-                    "and territories worldwide based on how corrupt a country’s public sector "
-                    "is perceived to be by experts and business executives. It is a composite "
-                    "index, a combination of at least 3 and up to 13 surveys and assessments "
-                    "of corruption, collected by a variety of reputable institutions. The "
-                    "results are given on a scale of 0 (highly corrupt) to 100 (very clean). "
-                    "The CPI is the most widely used indicator of corruption worldwide.\n"
+                    "notes": "This dataset contains Corruption Perceptions Index (CPI) scores and rankings for countries and territories, published by Transparency International. Scores range from 0 (highly corrupt) to 100 (very clean) and reflect perceived levels of public sector corruption based on assessments by experts and business executives.\n"
                     "\n"
-                    "Read more about the CPI here: [https://www.transparency.org/en/cpi]"
-                    "(https://www.transparency.org/en/cpi)\n",
+                    "For more information, visit the [Corruption Perceptions Index](https://www.transparency.org/en/cpi) on the Transparency International website.\n",
                 }
 
                 resources = dataset.get_resources()
                 assert len(resources) == 1
-                assert resources[0]["name"] == "afg-cpi.csv"
+                assert resources[0]["name"] == "afg_cpi.csv"
                 assert (
                     resources[0]["description"]
                     == "Corruption Perceptions Index score and rank for Afghanistan"
@@ -140,32 +133,25 @@ class TestPipeline:
                     "maintainer": "0e37ef02-82c6-4f36-a336-52e94df45ee9",
                     "owner_org": "e0035cc4-87fb-443c-8045-4e9f7463a67c",
                     "data_update_frequency": 365,
-                    "notes": "The Corruption Perception Index (CPI) scores and ranks over 100 countries "
-                    "and territories worldwide based on how corrupt a country’s public sector "
-                    "is perceived to be by experts and business executives. It is a composite "
-                    "index, a combination of at least 3 and up to 13 surveys and assessments "
-                    "of corruption, collected by a variety of reputable institutions. The "
-                    "results are given on a scale of 0 (highly corrupt) to 100 (very clean). "
-                    "The CPI is the most widely used indicator of corruption worldwide.\n"
+                    "notes": "This dataset contains Corruption Perceptions Index (CPI) scores and rankings for countries and territories, published by Transparency International. Scores range from 0 (highly corrupt) to 100 (very clean) and reflect perceived levels of public sector corruption based on assessments by experts and business executives.\n"
                     "\n"
-                    "Read more about the CPI here: [https://www.transparency.org/en/cpi]"
-                    "(https://www.transparency.org/en/cpi)\n",
+                    "For more information, visit the [Corruption Perceptions Index](https://www.transparency.org/en/cpi) on the Transparency International website.\n",
                 }
 
                 global_resources = global_dataset.get_resources()
                 assert len(global_resources) == 4  # 1 all-years + 3 per-year
-                assert global_resources[0]["name"] == "global-cpi-all.csv"
+                assert global_resources[0]["name"] == "global_cpi_all.csv"
                 assert (
                     global_resources[0]["description"]
                     == "Corruption Perceptions Index scores and ranks for all countries"
                 )
-                assert global_resources[1]["name"] == "global-cpi-2024.csv"
+                assert global_resources[1]["name"] == "global_cpi_2024.csv"
                 assert (
                     global_resources[1]["description"]
                     == "Corruption Perceptions Index scores and ranks for all countries in 2024"
                 )
-                assert global_resources[2]["name"] == "global-cpi-2023.csv"
-                assert global_resources[3]["name"] == "global-cpi-2012.csv"
+                assert global_resources[2]["name"] == "global_cpi_2023.csv"
+                assert global_resources[3]["name"] == "global_cpi_2012.csv"
 
                 for global_resource in global_resources:
                     filename = global_resource["name"]

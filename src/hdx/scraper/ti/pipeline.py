@@ -24,7 +24,7 @@ class Pipeline:
         Get data from Transparency International API and split by country
         """
         base_url = self._configuration["base_url"]
-        data = self._retriever.download_json(base_url)
+        data = self._retriever.download_json(base_url, filename="latest_cpi.json")
 
         # Split data by country and only take data from 2012 onward
         country_data = {}
@@ -62,7 +62,7 @@ class Pipeline:
         years = [record["year"] for record in records]
         dataset.set_time_period(datetime(min(years), 1, 1), datetime(max(years), 1, 1))
 
-        resource_name = f"{countryiso.lower()}-cpi.csv"
+        resource_name = f"{countryiso.lower()}_cpi.csv"
         resource_description = self._configuration["description"].replace(
             "(country)", country_name
         )
@@ -104,10 +104,10 @@ class Pipeline:
 
         dataset.generate_resource(
             folder=self._tempdir,
-            filename="global-cpi-all.csv",
+            filename="global_cpi_all.csv",
             rows=all_records,
             resourcedata={
-                "name": "global-cpi-all.csv",
+                "name": "global_cpi_all.csv",
                 "description": self._configuration["description_global"],
             },
             headers=headers,
@@ -115,12 +115,13 @@ class Pipeline:
 
         for year in sorted(set(years), reverse=True):
             year_records = [r for r in all_records if r["year"] == year]
+            year_filename = f"global_cpi_{year}.csv"
             dataset.generate_resource(
                 folder=self._tempdir,
-                filename=f"global-cpi-{year}.csv",
+                filename=year_filename,
                 rows=year_records,
                 resourcedata={
-                    "name": f"global-cpi-{year}.csv",
+                    "name": year_filename,
                     "description": self._configuration["description_year"].replace(
                         "(year)", str(year)
                     ),
