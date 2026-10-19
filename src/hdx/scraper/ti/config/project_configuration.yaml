@@ -10,3 +10,47 @@ tags:
   - indicators
   - poverty
   - socioeconomics
+
+# Columns of Transparency International CPI resources (schema_001 in
+# transparencyinternational_schemas.xlsx)
+data_dictionary:
+  - field: country
+    label: Country
+    data_type: text
+    description: "Country name"
+  - field: iso3
+    label: ISO3
+    data_type: text
+    description: "ISO 3166-1 alpha-3 country code"
+  - field: region
+    label: Region
+    data_type: text
+    description: "TI region code: AME, AP, ECA, MENA, SSA or WE/EU"
+  - field: year
+    label: Year
+    data_type: numeric
+    description: "Calendar year of observation"
+  - field: score
+    label: CPI score
+    data_type: numeric
+    description: "CPI score, 0 (highly corrupt) to 100 (very clean)"
+  - field: rank
+    label: Rank
+    data_type: numeric
+    description: "CPI rank among countries/territories that year"
+  - field: sources
+    label: Number of sources
+    data_type: numeric
+    description: "Number of data sources used for CPI score (3-13)"
+  - field: standardError
+    label: Standard error
+    data_type: numeric
+    description: "Standard error of CPI score across data sources"
+  - field: lowerCi
+    label: Lower confidence interval
+    data_type: numeric
+    description: "Lower bound of 90% confidence interval of CPI score"
+  - field: upperCi
+    label: Upper confidence interval
+    data_type: numeric
+    description: "Upper bound of 90% confidence interval of CPI score"
