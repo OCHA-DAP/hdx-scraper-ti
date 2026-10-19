@@ -86,7 +86,9 @@ class TestPipeline:
                     == "Corruption Perceptions Index score and rank for Afghanistan"
                 )
 
+                data_dictionary = configuration["data_dictionary"]
                 for resource in resources:
+                    assert resource.get_hdx_data_dictionary() == data_dictionary
                     filename = resource["name"]
                     actual = join(tempdir, filename)
                     expected = join(input_dir, filename)
@@ -154,6 +156,7 @@ class TestPipeline:
                 assert global_resources[3]["name"] == "global_cpi_2012.csv"
 
                 for global_resource in global_resources:
+                    assert global_resource.get_hdx_data_dictionary() == data_dictionary
                     filename = global_resource["name"]
                     actual = join(tempdir, filename)
                     expected = join(input_dir, filename)

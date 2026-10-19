@@ -66,7 +66,7 @@ class Pipeline:
         resource_description = self._configuration["description"].replace(
             "(country)", country_name
         )
-        dataset.generate_resource(
+        _, results = dataset.generate_resource(
             folder=self._tempdir,
             filename=resource_name,
             rows=records,
@@ -75,6 +75,9 @@ class Pipeline:
                 "description": resource_description,
             },
             headers=list(records[0].keys()),
+        )
+        results["resource"].set_hdx_data_dictionary(
+            self._configuration["data_dictionary"]
         )
 
         return dataset
@@ -102,7 +105,7 @@ class Pipeline:
 
         headers = list(all_records[0].keys())
 
-        dataset.generate_resource(
+        _, results = dataset.generate_resource(
             folder=self._tempdir,
             filename="global_cpi_all.csv",
             rows=all_records,
@@ -112,11 +115,14 @@ class Pipeline:
             },
             headers=headers,
         )
+        results["resource"].set_hdx_data_dictionary(
+            self._configuration["data_dictionary"]
+        )
 
         for year in sorted(set(years), reverse=True):
             year_records = [r for r in all_records if r["year"] == year]
             year_filename = f"global_cpi_{year}.csv"
-            dataset.generate_resource(
+            _, results = dataset.generate_resource(
                 folder=self._tempdir,
                 filename=year_filename,
                 rows=year_records,
@@ -127,6 +133,9 @@ class Pipeline:
                     ),
                 },
                 headers=headers,
+            )
+            results["resource"].set_hdx_data_dictionary(
+                self._configuration["data_dictionary"]
             )
 
         return dataset
