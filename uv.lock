@@ -415,7 +415,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "hdx-python-api", specifier = ">=6.7.0" },
+    { name = "hdx-python-api", specifier = ">=6.7.3" },
     { name = "hdx-python-country" },
     { name = "hdx-python-utilities" },
 ]
